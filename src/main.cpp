@@ -8,8 +8,6 @@
 #include "render.h"
 #include "route_planner.h"
 
-//ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDzMQL1XL0wkBYDeb/NbUyrMjwPfI0/jUusGeUYnbCJ9 tigonfairy@gmail.com
-
 using namespace std::experimental;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
