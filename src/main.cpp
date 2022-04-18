@@ -8,8 +8,6 @@
 #include "render.h"
 #include "route_planner.h"
 
-//ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDzMQL1XL0wkBYDeb/NbUyrMjwPfI0/jUusGeUYnbCJ9 tigonfairy@gmail.com
-
 using namespace std::experimental;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
@@ -57,8 +55,9 @@ int main(int argc, const char **argv)
   
     // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
     // user input for these values using std::cin. Pass the user input to the
-    // RoutePlanner object below in place of 10, 10, 90, 90.
+    // RoutePlanner object below in place of 10, 10, 90, 90.  
     float start_x, start_y, end_x, end_y;
+#if 0  
     std::cout << "Please input start point (start_x, start_y) and destination point (end_x, end_y)\n";
     std::cout << "Coordinate x, y should be ranged 0..100\n";
     std::cin >> start_x >> start_y >> end_x >> end_y;
@@ -70,6 +69,12 @@ int main(int argc, const char **argv)
             std::cout << "Err: Coordinate x, y out of range 0..100\n";
             return -1;
         }        
+#else
+  start_x = 10;
+  start_y = 10;
+  end_x = 90;
+  end_y = 90;
+#endif
     // Build Model.
     RouteModel model{osm_data};
 

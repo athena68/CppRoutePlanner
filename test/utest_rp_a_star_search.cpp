@@ -68,8 +68,6 @@ TEST_F(RoutePlannerTest, TestCalculateHValue) {
     EXPECT_FLOAT_EQ(route_planner.CalculateHValue(mid_node), 0.58903033);
 }
 
-
-
 // Test the AddNeighbors method.
 bool NodesSame(RouteModel::Node* a, RouteModel::Node* b) { return a == b; }
 TEST_F(RoutePlannerTest, TestAddNeighbors) {
@@ -88,6 +86,39 @@ TEST_F(RoutePlannerTest, TestAddNeighbors) {
         EXPECT_FLOAT_EQ(neighbors[i]->h_value, start_neighbor_h_vals[i]);
         EXPECT_EQ(neighbors[i]->visited, true);
     }
+}
+
+// Test the NextNode method.
+TEST_F(RoutePlannerTest, TestNextNode) {
+    std::vector<RouteModel::Node*> open_list;
+  
+	RouteModel::Node expected_next_node;
+  	expected_next_node.g_value = 1;
+    expected_next_node.h_value = 1;
+    open_list.push_back(&expected_next_node);
+  
+    RouteModel::Node node1;
+  	node1.g_value = 2;
+    node1.h_value = 2;
+    open_list.push_back(&node1);
+  
+    RouteModel::Node node2;
+  	node2.g_value = 3;
+    node2.h_value = 3;
+    open_list.push_back(&node2);  
+  
+    sort(open_list.begin(), open_list.end(), [](RouteModel::Node *node1, RouteModel::Node *node2) {
+        auto f1 = node1->g_value + node1->h_value;
+        auto f2 = node2->g_value + node2->h_value;
+
+        return f1 > f2;
+    });
+    RouteModel::Node* test_node = open_list.back();
+    open_list.pop_back();
+
+    EXPECT_TRUE(expected_next_node.g_value == test_node->g_value);
+    EXPECT_TRUE(expected_next_node.h_value == test_node->h_value);
+    EXPECT_EQ(open_list.size(), 2);
 }
 
 

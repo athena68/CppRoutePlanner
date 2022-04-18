@@ -6,38 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../thirdparty/pugixml/src/pugiconfig.hpp
-
-../thirdparty/pugixml/src/pugixml.hpp
-pugiconfig.hpp
-../thirdparty/pugixml/src/pugiconfig.hpp
-stddef.h
--
-exception
--
-iterator
--
-iosfwd
--
-string
--
-
-/home/workspace/CppND-Route-Planning-Project/src/model.cpp
-model.h
-/home/workspace/CppND-Route-Planning-Project/src/model.h
-pugixml.hpp
-/home/workspace/CppND-Route-Planning-Project/src/pugixml.hpp
-iostream
--
-string_view
--
-cmath
--
-algorithm
--
-assert.h
--
-
 /home/workspace/CppND-Route-Planning-Project/src/model.h
 vector
 -
@@ -46,12 +14,6 @@ unordered_map
 string
 -
 cstddef
--
-
-/home/workspace/CppND-Route-Planning-Project/src/route_model.cpp
-route_model.h
-/home/workspace/CppND-Route-Planning-Project/src/route_model.h
-iostream
 -
 
 /home/workspace/CppND-Route-Planning-Project/src/route_model.h
