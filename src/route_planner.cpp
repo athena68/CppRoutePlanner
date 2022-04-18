@@ -2,7 +2,6 @@
 #include <algorithm>
 
 RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, float end_x, float end_y): m_Model(model) {
-  	std::cout << "[DBG] -- RoutePlanner contructor : IN" << "\n";
     // Convert inputs to percentage:
     start_x *= 0.01;
     start_y *= 0.01;
@@ -11,9 +10,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
     // TODO 2: Use the m_Model.FindClosestNode method to find the closest nodes to the starting and ending coordinates.
     // Store the nodes you find in the RoutePlanner's start_node and end_node attributes.
-  *start_node = m_Model.FindClosestNode(start_x, start_y);
-  *end_node = m_Model.FindClosestNode(end_x, end_y);
-  std::cout << "[DBG] -- RoutePlanner contructor : OUT" << "\n";
+  start_node = &(m_Model.FindClosestNode(start_x, start_y));
+  end_node = &(m_Model.FindClosestNode(end_x, end_y));
 }
 
 
@@ -88,10 +86,6 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
     distance *= m_Model.MetricScale(); // Multiply the distance by the scale of the map to get meters.
     return path_found;
-
-    distance *= m_Model.MetricScale(); // Multiply the distance by the scale of the map to get meters.
-    return path_found;
-
 }
 
 
@@ -104,7 +98,16 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
 void RoutePlanner::AStarSearch() {
     RouteModel::Node *current_node = nullptr;
-
     // TODO: Implement your solution here.
+    // Initialize the starting node.
+    current_node = start_node;
+    AddNeighbors(current_node);
 
+    while(open_list.size() > 0) {
+        current_node = NextNode();
+
+        if (current_node == end_node) {
+            m_Model.path = ConstructFinalPath(current_node);
+        }
+    }
 }
